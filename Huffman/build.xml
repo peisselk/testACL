@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<project default = "run">
+
+	<target name = "clean">
+		<delete dir = "bin"/>
+		<delete dir = "exe"/>
+	</target>
+
+	<target name = "compile" depends = "clean">
+		<mkdir dir = "bin"/>
+		<javac includeantruntime = "false" srcdir = "source" destdir = "bin"/>
+	</target>
+
+	<target name = "jar" depends = "compile">
+		<mkdir dir = "exe"/>
+		<jar destfile = "exe/Test.jar" basedir = "bin/">
+			<manifest>
+				<attribute name = "Main-Class" value = "Test"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name = "run" depends = "jar">
+		<java jar = "exe/Test.jar" fork = "true"/>
+	</target>
+	
+</project>
